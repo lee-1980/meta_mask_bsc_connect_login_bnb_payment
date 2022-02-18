@@ -1,3 +1,5 @@
+
+// changing metamask Network binance smart chain
 const metaMask_network = () => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -37,8 +39,9 @@ const metaMask_network = () => {
                 reject(switchError.message);
             }
         });
-    };
+};
 
+// connect metamask wallet to site
 const metaMask_connect = () => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -51,6 +54,7 @@ const metaMask_connect = () => {
             }
         });
  };
+
 const metaMask_login = () => {
         return new Promise(async (resolve) => {
 
@@ -83,5 +87,19 @@ const metaMask_login = () => {
             }
 
         });
-
 };
+
+//example for calling metamask_login function
+
+$(document.body).on('click', '.play_button', async function () {
+    let response = await metaMask_login();
+    if(response.result){
+            //login is successful or already logged
+            ....
+    }
+    else{
+           // failed
+            alert(response.message);
+    }
+            
+})
