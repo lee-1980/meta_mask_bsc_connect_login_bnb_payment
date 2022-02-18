@@ -55,6 +55,7 @@ const metaMask_connect = () => {
         });
  };
 
+//main login function
 const metaMask_login = () => {
         return new Promise(async (resolve) => {
 
