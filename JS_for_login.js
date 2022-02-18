@@ -5,7 +5,7 @@ const metaMask_network = () => {
             try {
                 await ethereum.request({
                     method: 'wallet_switchEthereumChain',
-                    params: [{chainId: '0x38'}],
+                    params: [{chainId: '0x61'}],                                                 // in case of mainnet '0x38'
                 });
 
                 resolve();
@@ -17,7 +17,7 @@ const metaMask_network = () => {
                         await ethereum.request({
                             method: 'wallet_addEthereumChain',
                             params: [{
-                                chainId: '0x38',
+                                chainId: '0x61',                                                // in case of mainnet '0x38'
                                 chainName: 'Binance Smart Chain',
                                 nativeCurrency: {
                                     name: 'Binance Coin',
