@@ -24,8 +24,8 @@ const metaMask_network = () => {
                                     symbol: 'BNB',
                                     decimals: 18
                                 },
-                                rpcUrls: ['https://bsc-dataseed.binance.org/'],
-                                blockExplorerUrls: ['https://bscscan.com']
+                                rpcUrls: ['https://data-seed-prebsc-1-s1.binance.org:8545/'],   // in case of mainnet 'https://bsc-dataseed.binance.org/'
+                                blockExplorerUrls: ['https://testnet.bscscan.com']              // in case of mainnet 'https://bscscan.com'
                             }]
                         });
 
