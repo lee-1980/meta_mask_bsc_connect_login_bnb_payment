@@ -13,7 +13,7 @@ const send_BNB = () => {
                 const transactionParameters = {
                     to: '0x87433AA1222303A5D04e32069449FA10fF53206F',  // Required except during contract publications. currently my wallet address
                     from: ethereum.selectedAddress,                    // must match user's active address.
-                    chainId: '0x61',                                   // 
+                    chainId: '0x61',                                   // in case of mainnet '0x38'
                     value: hex_value
                 };
 
