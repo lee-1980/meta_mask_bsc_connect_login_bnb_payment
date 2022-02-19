@@ -37,3 +37,20 @@ const send_BNB = () => {
             }
         });
     };
+
+
+//example for calling pay function function
+
+$(document.body).on('click', '.play_button', async function () {
+    let response = await send_BNB();
+    if(response.result){
+            //payment is successful or already logged
+            ....
+            console.log(response.hashcode);
+    }
+    else{
+           // failed
+            alert(response.message);
+    }
+            
+})
