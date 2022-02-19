@@ -44,7 +44,7 @@ const send_BNB = () => {
 $(document.body).on('click', '.play_button', async function () {
     let response = await send_BNB();
     if(response.result){
-            //payment is successful or already logged
+            //payment is successful
             ....
             console.log(response.hashcode);
     }
