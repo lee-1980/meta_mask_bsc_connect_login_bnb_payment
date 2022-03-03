@@ -436,12 +436,13 @@ const contractInstance = new web3.eth.Contract(contract_API, contract_address);
 const chainId = '0x61';
 
 
-const get_farm_id = (walletaddress) => {
+const get_farm_id = () => {
     return new Promise(async (resolve) => {
         try {
+            let walletaddress = await metaMask_connect();
             let farm_Id = await contractInstance.methods.mint_status(walletaddress).call();
 
-            if(parseInt(farm_Id) > 6 ){
+            if(parseInt(farm_Id) > 0 ){
                 resolve(farm_Id);
             }
             else {
@@ -499,7 +500,7 @@ const send_BNB = () => {
 
                 rendering = true;
 
-                let farm_Id = await get_farm_id(walletaddress);
+                let farm_Id = await get_farm_id();
 
                 rendering = false;
 
