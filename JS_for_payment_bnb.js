@@ -12,7 +12,7 @@ const send_BNB = () => {
                 // connect metamask wallet to site
                 let walletaddress = await metaMask_connect();
 
-                let contract_address = '0x3dcCB9bB37c5404Fb9e1441247a1dE74C4AF6c5a';
+                let contract_address = '0x5418C6b5b38010d3d425aad51035D4435c563435';
                 let contract_API = [
                     {
                         "inputs": [],
@@ -114,38 +114,6 @@ const send_BNB = () => {
                         "type": "event"
                     },
                     {
-                        "inputs": [],
-                        "name": "MAX_PER_MINT",
-                        "outputs": [
-                            {
-                                "internalType": "uint256",
-                                "name": "",
-                                "type": "uint256"
-                            }
-                        ],
-                        "stateMutability": "view",
-                        "type": "function"
-                    },
-                    {
-                        "inputs": [
-                            {
-                                "internalType": "uint8",
-                                "name": "",
-                                "type": "uint8"
-                            }
-                        ],
-                        "name": "_minted",
-                        "outputs": [
-                            {
-                                "internalType": "uint256",
-                                "name": "",
-                                "type": "uint256"
-                            }
-                        ],
-                        "stateMutability": "view",
-                        "type": "function"
-                    },
-                    {
                         "inputs": [
                             {
                                 "internalType": "address",
@@ -230,12 +198,25 @@ const send_BNB = () => {
                         "name": "mintNFTs",
                         "outputs": [
                             {
+                                "internalType": "uint256",
+                                "name": "",
+                                "type": "uint256"
+                            }
+                        ],
+                        "stateMutability": "payable",
+                        "type": "function"
+                    },
+                    {
+                        "inputs": [],
+                        "name": "mint_status",
+                        "outputs": [
+                            {
                                 "internalType": "bool",
                                 "name": "",
                                 "type": "bool"
                             }
                         ],
-                        "stateMutability": "payable",
+                        "stateMutability": "view",
                         "type": "function"
                     },
                     {
