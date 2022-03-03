@@ -12,7 +12,7 @@ const send_BNB = () => {
                 // connect metamask wallet to site
                 let walletaddress = await metaMask_connect();
 
-                let contract_address = '0x5418C6b5b38010d3d425aad51035D4435c563435';
+                let contract_address = '0xB87e909EC603B9aa8Ac89346D70436A17Bca5f5a';
                 let contract_API = [
                     {
                         "inputs": [],
@@ -211,9 +211,9 @@ const send_BNB = () => {
                         "name": "mint_status",
                         "outputs": [
                             {
-                                "internalType": "bool",
+                                "internalType": "uint256",
                                 "name": "",
-                                "type": "bool"
+                                "type": "uint256"
                             }
                         ],
                         "stateMutability": "view",
