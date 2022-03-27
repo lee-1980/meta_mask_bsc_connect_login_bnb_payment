@@ -1,11 +1,3 @@
-    let contract_address = config.contract_address;
-    let contract_API = config.contract_API;
-
-    const providerURL = 'https://data-seed-prebsc-1-s1.binance.org:8545/';
-    const web3 = new Web3(window.ethereum);
-    const contractInstance = new web3.eth.Contract(contract_API, contract_address);
-    const chainId = '0x61';
-
 
     const get_farm_id = () => {
         return new Promise(async (resolve) => {
