@@ -21,7 +21,7 @@ const deposit_token_into = (tokenAmount, tokenId) =>{
                 await contractInstance.methods.depositTokenIntoFarm(hex_converter(tokenAmount * 10 ), tokenId).send({from: walletaddress, value: hex_value});
 
                 resolve({
-                    result: true
+                    result: true    
                 });
             }
             catch (e){
