@@ -6,7 +6,7 @@
         let metadata = {
             fields: [
                 { seed: true, seedType: "wheat", status: 3},
-                { seed: true, seedType: "wheat", status: 0},
+                { seed: false, seedType: "", status: 0},
                 { seed: true, seedType: "wheat", status: 1}
             ]
         }
