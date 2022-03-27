@@ -6,6 +6,10 @@
     const contractInstance = new web3.eth.Contract(contract_API, contract_address);
     const chainId = '0x61';
 
+    const TokenUSD = () =>{
+        return 0.0001 / 10;
+    }
+
     const hex_converter = (value) =>{
         return '0x' + Math.trunc(value).toString(16);
     };
