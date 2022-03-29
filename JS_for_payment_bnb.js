@@ -1,24 +1,5 @@
 
-    const get_farm_id = () => {
-        return new Promise(async (resolve) => {
-            try {
-                let walletaddress = await metaMask_connect();
-                let farms = await contractInstance.methods.getFarms().call({from: walletaddress});
-                console.log(farms, 'Farm_land');
-                if(farms.length && parseInt(farms[0].tokenId) > 0 ){
-                    resolve(farms[0].tokenId);
-                }
-                else {
-                    resolve(0);
-                }
-            }
-            catch (error) {
-                console.log(error.message);
-                resolve(0);
-            }
-        });
-
-    };
+  
 
     const send_BNB = () => {
         return new Promise(async (resolve) => {
