@@ -31,19 +31,66 @@
 
 
     // this one will be handled over response from websocket server, once login request is sent from browser to server.
+    // our login request was sent in metamask_login function, we catch response from websocket here to fill our jwttoken and userid values
     let initJwtToken = (params) => {
         jwtToken = params.jwtToken?params.jwtToken: '';
         userid = params.userid?params.userid:'';
+        
+        // we got farmId and userid and jwttoken here, so we send request server to load farm data. response will be available in loaddataResponse function
+        
+         let metadata = {
+            userid: userid,
+            farmId: farm_Id,
+        };
+        ws.send(JSON.stringify({
+            type: "loaddata",
+            token: jwtToken,
+            data: metadata
+        }));
+        
         return;
     };
 
     // this one will be handled over response from websocket server, once save request is sent from browser to server
     let saveDataResponse = (params) => {
+        // param , structure will be like this:
+//         {
+//             code: 200
+//             status: "success"
+//             type: "savedata"
+//         }
         console.log(params);
     };
+    let saveDataRequest = (constructJSONData) => {
+        if (jwtToken){
+            // update
+            let metadata = {
+                userid: userid,
+                farmId: 1,
+                farmData: constructJSONData
+            };
+            ws.send(JSON.stringify({
+                type: "savedata",
+                token: jwtToken,
+                data: metadata
+            }));
+        }
+    }
 
     // this one will be handled over response from websocket server, once load request is sent from browser to server
+    // this function will be run after load request is sent to server and server reply .
     let loaddataResponse = (params) => {
+        //params ,result will be looked like this:
+        // structure:
+//          {
+//            code: 200
+//            farmData: "{\"fields\":[{\"seed\":false,\"seedType\":\"wheat\",\"status\":3},{\"seed\":true,\"seedType\":\"wheat\",\"status\":0},{\"seed\":true,\"seedType\":\"wheat\",\"status\":1}]}"
+//            status: "success"
+//            type: "loaddata
+//          }
+        
+        // FarmData will be  your own contruct whole json , because we will save your construct json string to this field
+        // to use this value, as it is json string we maybe parse it.
         let farmData = JSON.parse(params.farmData);
         console.log(farmData);
     }
