@@ -121,10 +121,8 @@
     // famr id = 0 means no farm!
     const get_farm_id = () => {
         return new Promise(async (resolve) => {
-            try {
-                let login_result = await metaMask_login();
-
-                if (login_result.result) {
+            try {      
+                if (userWalletAddress.result) {
                     let walletaddress = login_result.walletaddress;
                     let farms = await contractInstance.methods.getFarms().call({from: walletaddress});
                     console.log(farms, 'Farm_land');
