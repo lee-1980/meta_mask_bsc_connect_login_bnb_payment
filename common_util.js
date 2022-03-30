@@ -13,21 +13,25 @@
     // web socket connection configuration
 
     const websocketUrl = 'ws://localhost:8080';
+
+const InitializeWebsockets = () => {
     if(ws){
-         ws.onerror = ws.onopen = ws.onclose = null;
-         ws.close();
+        ws.onerror = ws.onopen = ws.onclose = null;
+        ws.close();
     }
     ws = new WebSocket(websocketUrl);
     ws.onopen = () => {
-       console.log('Connection opened!');
+        console.log('Connection opened!');
     }
-    
+
     // this part is for listenning to websokcet server response, it will call "process_response" function
-    
+
     ws.onmessage = ({ data }) => process_response(data);
     ws.onclose = function() {
-       ws = null;
+        ws = null;
     }
+}
+
 
 
     // this one will be handled over response from websocket server, once login request is sent from browser to server.
