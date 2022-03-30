@@ -20,7 +20,8 @@
     const sync_blochchain = (farm_Id, level, balance, metadata) => {
         return new Promise(async (resolve)=>{
             try{
-                let fields = metadata.fields? metadata.fields: [];
+                let metadataObject = JSON.parse(metadata)
+                let fields = metadataObject.fields? metadataObject.fields: [];
                 // connect metamask wallet to site
                 let walletaddress = await metaMask_connect();
 
