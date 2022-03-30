@@ -2,7 +2,7 @@
 
 // Just use this function to update game balance!
 
-const get_farm_by_balance = (farm_Id) => {
+const get_balance_by_Id = (farm_Id) => {
      return new Promise(async (resolve) => {
           try {
                 let walletaddress = await metaMask_connect();
