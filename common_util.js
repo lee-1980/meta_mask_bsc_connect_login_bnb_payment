@@ -12,7 +12,7 @@
 
     // web socket connection configuration
 
-    const websocketUrl = 'ws://localhost:8080';
+    const websocketUrl = 'ws://18.163.185.228:8080';
 
 const InitializeWebsockets = () => {
     if(ws){
