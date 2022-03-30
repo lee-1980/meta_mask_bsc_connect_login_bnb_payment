@@ -50,12 +50,19 @@ const InitializeWebsockets = () => {
 
     // this one will be handled over response from websocket server, once save request is sent from browser to server
     let saveDataResponse = (params) => {
-        // param , structure will be like this:
+//         If result is successful, response params structure will be like this:
 //         {
 //             code: 200
 //             status: "success"
 //             type: "savedata"
 //         }
+//     if fail, like this:
+//     {
+//     "code": 401,
+//     "status": "error",
+//     "message": "Sorry access to resource denied",
+//     "type": "savedata"
+//     }
         console.log(params);
     };
     let saveDataRequest = (constructJSONData) => {
@@ -77,14 +84,21 @@ const InitializeWebsockets = () => {
     // this one will be handled over response from websocket server, once load request is sent from browser to server
     // this function will be run after load request is sent to server and server reply .
     let loaddataResponse = (params) => {
-        //params ,result will be looked like this:
-        // structure:
+//         if successfull , result will be looked like this:
+//         structure:
 //          {
 //            code: 200
 //            farmData: "{\"fields\":[{\"seed\":false,\"seedType\":\"wheat\",\"status\":3},{\"seed\":true,\"seedType\":\"wheat\",\"status\":0},{\"seed\":true,\"seedType\":\"wheat\",\"status\":1}]}"
 //            status: "success"
 //            type: "loaddata
 //          }
+//      if error, structure
+//      {
+//     "code": 400,
+//     "status": "error",
+//     "message": "server error", // there are two kind of error messages now
+//     "type": "loaddata"
+// }
         
         // FarmData will be  your own contruct whole json , because we will save your construct json string to this field
         // to use this value, as it is json string we maybe parse it.
