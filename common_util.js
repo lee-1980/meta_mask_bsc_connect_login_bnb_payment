@@ -66,7 +66,7 @@
             // update
             let metadata = {
                 userid: userid,
-                farmId: 1,
+                farmId: farm_Id,
                 farmData: constructJSONData
             };
             ws.send(JSON.stringify({
