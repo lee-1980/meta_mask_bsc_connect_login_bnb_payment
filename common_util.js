@@ -129,6 +129,7 @@
                     let farms = await contractInstance.methods.getFarms().call({from: walletaddress});
                     console.log(farms, 'Farm_land');
                     if (farms.length && parseInt(farms[0].tokenId) > 0) {
+                        farm_Id = farms[0].tokenId;
                         resolve(farms[0].tokenId);
                     } else {
                         resolve(0);
@@ -147,7 +148,7 @@
     // Example codes 
     const Game_start_function = async () => {
         // we need to import farm_id value into farm_Id global variable, becaue it will be used on other sides not only here, but also other places
-        farm_Id = await get_farm_id();
+        await get_farm_id();
         
         
         // then we can use this to check if we can skip screens and get into game directly
