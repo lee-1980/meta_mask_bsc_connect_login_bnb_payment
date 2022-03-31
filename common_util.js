@@ -50,7 +50,7 @@ let ws_inited = false;
     
     
     const TokenUSD = () =>{
-        return 0.0001 / 10;
+        return 0.0001;
     }
 
     const hex_converter = (value) =>{
