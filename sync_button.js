@@ -26,7 +26,7 @@
                 let walletaddress = await metaMask_connect();
 
                 console.log(hex_converter(balance/TokenUSD()));
-                await contractInstance.methods.updateFarmStatus( farm_Id, level, hex_converter(balance/TokenUSD()), fields).send({from: walletaddress});
+                await contractInstance.methods.updateFarmStatus( farm_Id, level, hex_converter(balance/TokenUSD() * 10), fields).send({from: walletaddress});
                 resolve({
                     result: true
                 });
