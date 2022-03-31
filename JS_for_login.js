@@ -75,14 +75,18 @@ const metaMask_login = () => {
                 window.userWalletAddress = walletaddress;
                     
                 //******** I add new function here .here when metamask wallet is connected, websocket server login request is sent 
-                setTimeout(()=>{
+                let websocketInterval = setInterval(()=>{
+                    if (ws_inited) {
                     ws.send(JSON.stringify({
                         type: "login",
                         data: {
                             key: walletaddress
                         }
                     }));
-                }, 1000);
+                    clearInterval(websocketInterval);   
+                    }
+                   
+                }, 500);
 
                 resolve({
                     result: true,
