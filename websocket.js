@@ -2,7 +2,7 @@
  // New addtional global variables for connection with web socket server
 
     let ws, jwtToken, userid, farm_Id ;
-    let ws_inited = false;
+    
 
     // web socket connection configuration
 
