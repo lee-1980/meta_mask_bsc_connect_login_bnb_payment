@@ -14,7 +14,7 @@ const deposit_token_into = (tokenAmount, tokenId) =>{
 
                 const bnb_price = await convertBNBToUSDT();
 
-                const value = Number.parseFloat(tokenAmount * TokenUSD() * 10 / parseFloat(bnb_price.price)).toFixed(18) * 10 ** 18;
+                const value = Number.parseFloat(tokenAmount * TokenUSD() / parseFloat(bnb_price.price)).toFixed(18) * 10 ** 18;
                 // connect metamask wallet to site
                 let hex_value = hex_converter(value);
 
