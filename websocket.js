@@ -2,10 +2,11 @@
  // New addtional global variables for connection with web socket server
 
     let ws, jwtToken, userid, farm_Id ;
+    let ws_inited = false;
 
     // web socket connection configuration
 
-    const websocketUrl = 'ws://18.163.185.228:8080';
+    const websocketUrl = 'ws://82dc-128-14-140-248.ngrok.io';
 
 const InitializeWebsockets = () => {
     if(ws){
@@ -14,6 +15,7 @@ const InitializeWebsockets = () => {
     }
     ws = new WebSocket(websocketUrl);
     ws.onopen = () => {
+        ws_inited = true;
         console.log('Connection opened!');
     }
 
