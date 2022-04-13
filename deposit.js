@@ -18,7 +18,7 @@ const deposit_token_into = (tokenAmount, tokenId) =>{
                 // connect metamask wallet to site
                 let hex_value = hex_converter(value);
 
-                await contractInstance.methods.depositTokenIntoFarm(hex_converter(tokenAmount * 10 ), tokenId).send({from: walletaddress, value: hex_value});
+                await contractInstance.methods.depositTokenIntoFarm(hex_converter(tokenAmount * 10 ** 18 ), tokenId).send({from: walletaddress, value: hex_value});
 
                 resolve({
                     result: true    
