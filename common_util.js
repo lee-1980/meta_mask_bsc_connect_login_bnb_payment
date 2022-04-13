@@ -83,8 +83,8 @@ let ws_inited = false;
         }
     }
     
-    const calculate_token_amount = (usdPrice = 0.002) => {
-        return usdPrice/TokenUSD();
+    const calculate_token_amount = async (usdPrice = 0.002) => {
+        return usdPrice/await TokenUSD();
     }
 
     const hex_converter = (value) =>{
