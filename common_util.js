@@ -5,7 +5,11 @@
     const web3 = new Web3(window.ethereum);
     const contractInstance = new web3.eth.Contract(contract_API, contract_address);
     const chainId = '0x61';
-let ws_inited = false;   
+let ws_inited = false;
+ let tokenPrice = {
+    price: 0,
+    updatedAt: 0
+};
     
     // this function was existed already but we can now use it for our new function for skipping first buttons screen.
     // famr id = 0 means no farm!
