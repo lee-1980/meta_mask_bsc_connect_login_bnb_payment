@@ -17,7 +17,7 @@
         // response format will be same as withdraw functions
 
 
-    const sync_blochchain = (farm_Id, level, balance, metadata) => {
+const sync_blochchain = (farm_Id, level, balance, metadata) => {
         return new Promise(async (resolve)=>{
             try{
                 let metadataObject = JSON.parse(metadata)
@@ -25,8 +25,8 @@
                 // connect metamask wallet to site
                 let walletaddress = await metaMask_connect();
 
-                console.log(hex_converter(balance/TokenUSD()));
-                await contractInstance.methods.updateFarmStatus( farm_Id, level, hex_converter(balance/TokenUSD() * 10), fields).send({from: walletaddress});
+                console.log(hex_converter(balance));
+                await contractInstance.methods.updateFarmStatus( farm_Id, level, hex_converter(balance * 10 ** 18), fields).send({from: walletaddress});
                 resolve({
                     result: true
                 });
