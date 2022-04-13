@@ -49,8 +49,38 @@ let ws_inited = false;
     }
     
     
-    const TokenUSD = () =>{
-        return 0.0001;
+    const TokenUSD = async () =>{
+        try{
+            let current_time = Date.now();
+            if(tokenPrice.updatedAt === 0 || (current_time - tokenPrice.updatedAt) > 30000){
+                tokenPrice.updatedAt = current_time;
+                let chain_Id = await chainID();
+                let routerContractAddress =  config.router[chain_Id].contract_address;
+                let routerContractAbi = config.router[chain_Id].contract_abi;
+                let routerConstance = new web3.eth.Contract(routerContractAbi, routerContractAddress);
+
+                let amountIn = Web3.utils.toWei('1').toString();
+                if (typeof amountIn === 'number') {
+                    amountIn = Web3.utils.toWei(amountIn + '');
+                }
+                let BNBTOUSDT = (await convertBNBToUSDT()).price;
+                let [, TokenToBNB] = await routerConstance.methods.getAmountsOut(amountIn, [config.farmToken, config.WBNB[chain_Id].contract_address]).call();
+                let result = BNBTOUSDT * TokenToBNB / 10 ** 18;
+                tokenPrice.price = result;
+                return result;
+            }
+            else{
+                return tokenPrice.price
+            }
+        }
+        catch (e){
+            console.log(e.message);
+            return tokenPrice.price;
+        }
+    }
+    
+    const calculate_token_amount = (usdPrice = 0.002) => {
+        return usdPrice/TokenUSD();
     }
 
     const hex_converter = (value) =>{
@@ -59,9 +89,21 @@ let ws_inited = false;
 
     const convertBNBToUSDT = () =>{
         return new Promise(async (resolve)=>{
-            const bnb_price = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT')
-                .then(data => data.json());
-            resolve(bnb_price);
+            try{
+                let chain_Id = await chainID();
+                let routerContractAddress =  config.router[chain_Id].contract_address;
+                let routerContractAbi = config.router[chain_Id].contract_abi;
+                let routerConstance = new web3.eth.Contract(routerContractAbi, routerContractAddress);
+                let amountIn = Web3.utils.toWei('1').toString();
+                if (typeof amountIn === 'number') {
+                    amountIn = Web3.utils.toWei(amountIn + '');
+                }
+                let [, MaticUSDPrice] = await routerConstance.methods.getAmountsOut(amountIn, [config.WBNB[chain_Id].contract_address, config.USDT[chain_Id].contract_address]).call();
+                resolve({price :  (MaticUSDPrice/10**18).toFixed(2)});
+            }
+            catch (e){
+                resolve(0);
+            }
         })
         // send $1 worth BNB
     }
