@@ -9,7 +9,7 @@ const get_balance_by_Id = (farm_Id) => {
                 let farm = await contractInstance.methods.getFarm(farm_Id).call({from: walletaddress});
                 resolve({
                     result: true,
-                    balance: farm.balance * TokenUSD() / 10
+                    balance: farm.balance  / 10 ** 18
                 })
           }
           catch (error) {
