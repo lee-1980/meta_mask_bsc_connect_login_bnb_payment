@@ -10,6 +10,7 @@ let ws_inited = false;
     price: 0,
     updatedAt: 0
 };
+let BNBTOUSDT = 0;
     
     // this function was existed already but we can now use it for our new function for skipping first buttons screen.
     // famr id = 0 means no farm!
@@ -54,6 +55,10 @@ let ws_inited = false;
     
     
     const TokenUSD = async () =>{
+        return tokenPrice.price;
+    }
+
+    const UpdateTokenPrice =  setInterval(async () => {
         try{
             let current_time = Date.now();
             if(tokenPrice.updatedAt === 0 || (current_time - tokenPrice.updatedAt) > 30000){
@@ -67,47 +72,36 @@ let ws_inited = false;
                 if (typeof amountIn === 'number') {
                     amountIn = Web3.utils.toWei(amountIn + '');
                 }
-                let BNBTOUSDT = (await convertBNBToUSDT()).price;
+                let [, MaticUSDPrice] = await routerConstance.methods.getAmountsOut(amountIn, [config.WBNB[chain_Id].contract_address, config.USDT[chain_Id].contract_address]).call();
+                BNBTOUSDT = (MaticUSDPrice/10**18).toFixed(2);
                 let [, TokenToBNB] = await routerConstance.methods.getAmountsOut(amountIn, [config.farmToken, config.WBNB[chain_Id].contract_address]).call();
+
                 let result = BNBTOUSDT * TokenToBNB / 10 ** 18;
                 tokenPrice.price = result;
-                return result;
-            }
-            else{
-                return tokenPrice.price
             }
         }
         catch (e){
             console.log(e.message);
             return tokenPrice.price;
         }
+    }, 100000);
+
+
+
+    const runPriceUpdate = setInterval(async () => {
+        UpdateTokenPrice();
+    }, 100000);
+
+    UpdateTokenPrice();
+
+    const calculate_token_amount =  (usdPrice = 0.002) => {
+        return usdPrice/TokenUSD();
     }
     
-    const calculate_token_amount = async (usdPrice = 0.002) => {
-        return usdPrice/await TokenUSD();
-    }
-
     const hex_converter = (value) =>{
         return '0x' + Math.trunc(value).toString(16);
     };
 
     const convertBNBToUSDT = () =>{
-        return new Promise(async (resolve)=>{
-            try{
-                let chain_Id = await chainID();
-                let routerContractAddress =  config.router[chain_Id].contract_address;
-                let routerContractAbi = config.router[chain_Id].contract_abi;
-                let routerConstance = new web3.eth.Contract(routerContractAbi, routerContractAddress);
-                let amountIn = Web3.utils.toWei('1').toString();
-                if (typeof amountIn === 'number') {
-                    amountIn = Web3.utils.toWei(amountIn + '');
-                }
-                let [, MaticUSDPrice] = await routerConstance.methods.getAmountsOut(amountIn, [config.WBNB[chain_Id].contract_address, config.USDT[chain_Id].contract_address]).call();
-                resolve({price :  (MaticUSDPrice/10**18).toFixed(2)});
-            }
-            catch (e){
-                resolve(0);
-            }
-        })
-        // send $1 worth BNB
+        return {price :  BNBTOUSDT};
     }
