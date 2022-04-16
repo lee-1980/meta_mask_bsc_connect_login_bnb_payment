@@ -54,7 +54,7 @@ let BNBTOUSDT = 0;
     }
     
     
-    const TokenUSD = async () =>{
+    const TokenUSD =  () =>{
         return tokenPrice.price;
     }
 
