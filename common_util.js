@@ -58,7 +58,7 @@ let BNBTOUSDT = 0;
         return tokenPrice.price;
     }
 
-    const UpdateTokenPrice =  () => {
+    const UpdateTokenPrice = async () => {
         try{
             let current_time = Date.now();
             if(tokenPrice.updatedAt === 0 || (current_time - tokenPrice.updatedAt) > 30000){
