@@ -53,7 +53,18 @@ let BNBTOUSDT = 0;
         ...... Game logic        
     }
     
-    
+     const chainID = () => {
+        return new Promise(async (resolve) => {
+            try{
+                let net_Id = await ethereum.request({ method: 'eth_chainId' });
+                resolve(net_Id);
+            }
+            catch (e) {
+                resolve(0);
+            }
+        });
+
+    }
     const TokenUSD =  () =>{
         return tokenPrice.price;
     }
