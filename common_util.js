@@ -12,33 +12,32 @@ let ws_inited = false;
 };
 let BNBTOUSDT = 0;
     
-    // this function was existed already but we can now use it for our new function for skipping first buttons screen.
-    // famr id = 0 means no farm!
-    const get_farm_id = () => {
-        return new Promise(async (resolve) => {
-            try {      
-                let login_result = await metaMask_login();
+// this function was existed already but we can now use it for our new function for skipping first buttons screen.
+// famr id = 0 means no farm!
+const get_farm_id = () => {
+    return new Promise(async (resolve) => {
+        try {
+            let login_result = await metaMask_login();
 
-                if (login_result.result) {
-                    let walletaddress = login_result.walletaddress;
-                    let farms = await contractInstance.methods.getFarms().call({from: walletaddress});
-                    console.log(farms, 'Farm_land');
-                    if (farms.length && parseInt(farms[0].tokenId) > 0) {
-                        farm_Id = farms[0].tokenId;
-                        resolve(farms[0].tokenId);
-                    } else {
-                        resolve(0);
-                    }
+            if (login_result.result) {
+                let walletaddress = login_result.walletaddress;
+                let farms = await contractInstance.methods.getFarms().call({from: walletaddress});
+                console.log(farms, 'Farm_land');
+                if (farms.length && parseInt(farms[0].tokenId) > 0) {
+                    farm_Id = farms[0].tokenId;
+                    resolve(farms[0].tokenId);
                 } else {
-
+                    resolve(0);
                 }
-            } catch (error) {
-                console.log(error.message);
-                resolve(0);
+            } else {
+                console.log("testlogin")
             }
-        });
-    };
-
+        } catch (error) {
+            console.log(error.message);
+            resolve(0);
+        }
+    });
+};
 
     // Example codes 
     const Game_start_function = async () => {
