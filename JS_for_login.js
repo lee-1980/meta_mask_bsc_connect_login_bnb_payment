@@ -102,17 +102,3 @@ const metaMask_login = () => {
     });
 };
 
-//example for calling metamask_login function
-
-$(document.body).on('click', '.play_button', async function () {
-    let response = await metaMask_login();
-    if(response.result){
-            //login is successful or already logged
-            ....
-    }
-    else{
-           // failed
-            alert(response.message);
-    }
-            
-})
