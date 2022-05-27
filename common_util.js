@@ -52,21 +52,20 @@ const get_farm_id = () => {
         ...... Game logic        
     }
     
-     const chainID = () => {
-        return new Promise(async (resolve) => {
-            try{
-                let net_Id = await ethereum.request({ method: 'eth_chainId' });
-                resolve(net_Id);
-            }
-            catch (e) {
-                resolve(0);
-            }
-        });
+const chainID = () => {
+    return new Promise(async (resolve) => {
+        try {
+            let net_Id = await ethereum.request({method: 'eth_chainId'});
+            resolve(net_Id);
+        } catch (e) {
+            resolve(0);
+        }
+    });
+}
 
-    }
-    const TokenUSD =  () =>{
-        return tokenPrice.price;
-    }
+const TokenUSD = () => {
+    return parseFloat(tokenPrice.price).toFixed(4);
+}
 
     const UpdateTokenPrice = async () => {
         try{
@@ -97,21 +96,20 @@ const get_farm_id = () => {
     };
 
 
-
-    const runPriceUpdate = setInterval(async () => {
-        UpdateTokenPrice();
-    }, 100000);
+const runPriceUpdate = setInterval(async () => {
+    UpdateTokenPrice();
+}, 100000);
 
     UpdateTokenPrice();
 
-    const calculate_token_amount =  (usdPrice = 0.002) => {
-        return usdPrice/TokenUSD();
-    }
-    
-    const hex_converter = (value) =>{
-        return '0x' + Math.trunc(value).toString(16);
-    };
+const calculate_token_amount = (usdPrice = 0.002) => {
+    return usdPrice / TokenUSD();
+}
 
-    const convertBNBToUSDT = () =>{
-        return {price :  BNBTOUSDT};
-    }
+const hex_converter = (value) => {
+    return '0x' + Math.trunc(value).toString(16);
+};
+
+const convertBNBToUSDT = () => {
+    return {price: BNBTOUSDT};
+}
