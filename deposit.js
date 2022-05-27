@@ -6,32 +6,28 @@
 
         // response format is same as withdraw.
 
-const deposit_token_into = (tokenAmount, tokenId) =>{
-        return new Promise(async (resolve)=>{
-            try{
+const deposit_token_into = (tokenAmount, tokenId) => {
+    return new Promise(async (resolve) => {
+        try {
 
-                let walletaddress = await metaMask_connect();
+            let walletaddress = await metaMask_connect();
 
-                const bnb_price = await convertBNBToUSDT();
+            const bnb_price = await convertBNBToUSDT();
 
-                const value = Number.parseFloat(tokenAmount *  await TokenUSD() / parseFloat(bnb_price.price)).toFixed(18) * 10 ** 18;
-                // connect metamask wallet to site
-                let hex_value = hex_converter(value);
+            let value = Number.parseFloat(tokenAmount * await TokenUSD() / parseFloat(bnb_price.price)).toFixed(9);
+            value = web3.utils.toWei(value, 'ether');
+            await contractInstance.methods.depositTokenIntoFarm(value, tokenId).send({from: walletaddress});
 
-                await contractInstance.methods.depositTokenIntoFarm(hex_converter(tokenAmount * 10 ** 18 ), tokenId).send({from: walletaddress, value: hex_value});
-
-                resolve({
-                    result: true    
-                });
-            }
-            catch (e){
-                resolve({
-                    result: false,
-                    message: e.message
-                });
-            }
-        })
-
-    }
+            resolve({
+                result: true
+            });
+        } catch (e) {
+            resolve({
+                result: false,
+                message: e.message
+            });
+        }
+    })
+}
 
         
