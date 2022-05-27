@@ -57,51 +57,49 @@ const metaMask_connect = () => {
 
 //main login function
 const metaMask_login = () => {
-        return new Promise(async (resolve) => {
+    return new Promise(async (resolve) => {
 
-            try {
-                // check validation of metamask
-                if (!window.ethereum) {
-                    throw new Error('MetaMask is not installed');
-                }
+        try {
+            // check validation of metamask
+            if (!window.ethereum) {
+                throw new Error('MetaMask is not installed');
+            }
 
-                // changing metamask Network binance smart chain
-                await metaMask_network();
+            // changing metamask Network binance smart chain
+            await metaMask_network();
 
-                // connect metamask wallet to site
-                let walletaddress = await metaMask_connect();
+            // connect metamask wallet to site
+            let walletaddress = await metaMask_connect();
 
-                // save userwallet address into window object
-                window.userWalletAddress = walletaddress;
-                    
-                //******** I add new function here .here when metamask wallet is connected, websocket server login request is sent 
-                let websocketInterval = setInterval(()=>{
-                    if (ws_inited) {
+            // save userwallet address into window object
+            window.userWalletAddress = walletaddress;
+
+            //******** I add new function here .here when metamask wallet is connected, websocket server login request is sent
+            let websocketInterval = setInterval(() => {
+                if (ws_inited && farm_Id) {
                     ws.send(JSON.stringify({
                         type: "login",
                         data: {
                             key: walletaddress
                         }
                     }));
-                    clearInterval(websocketInterval);   
-                    }
-                   
-                }, 500);
+                    clearInterval(websocketInterval);
+                }
 
-                resolve({
-                    result: true,
-                    message: 'success',
-                    walletaddress: walletaddress
-                });
-            }
-            catch (e) {
-                resolve({
-                    result: false,
-                    message: e.message
-                });
-            }
+            }, 500);
 
-        });
+            resolve({
+                result: true,
+                message: 'success',
+                walletaddress: walletaddress
+            });
+        } catch (e) {
+            resolve({
+                result: false,
+                message: e.message
+            });
+        }
+    });
 };
 
 //example for calling metamask_login function
