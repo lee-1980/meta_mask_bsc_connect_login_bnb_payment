@@ -1,8 +1,4 @@
-        // withdraw money
-        // Example calling
-        let withdraw_farm_Id = 1;
 
-        await withdraw_token(withdraw_farm_Id);
 
         // response will be {reult: true} or {result: false, message: XXXX}
 
