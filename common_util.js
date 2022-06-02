@@ -39,19 +39,7 @@ const get_farm_id = () => {
     });
 };
 
-    // Example codes 
-    const Game_start_function = async () => {
-        // we need to import farm_id value into farm_Id global variable, becaue it will be used on other sides not only here, but also other places
-        await get_farm_id();
-        
-        
-        // then we can use this to check if we can skip screens and get into game directly
-        // if farm id > 0 means we can skip buttons screen
-        // farm id = 0 or undefined, we redirect customer to our original button page
-        
-        ...... Game logic        
-    }
-    
+
 const chainID = () => {
     return new Promise(async (resolve) => {
         try {
