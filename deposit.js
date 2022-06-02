@@ -1,8 +1,4 @@
-        // deposit token into farm
-        let CFRM_Token_Amount = 10;
-        let deposit_farm_Id = 1;
 
-        await deposit_token_into(CFRM_Token_Amount, deposit_farm_Id);
 
         // response format is same as withdraw.
 
