@@ -18,18 +18,3 @@ const get_balance_by_Id = (farm_Id) => {
         }
     });
 }
-
-
-// example data for farm structure 
-
-// if result is successful ,
-const responestructure = {
-   result: true,
-   balance: 0.05    // $
-}
-
-// if result is failed
-const responestructure = {
-   result: false,
-   balance: 0.05    // $
-}
