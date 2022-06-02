@@ -1,17 +1,4 @@
-        // example data
-        let farmd_Id = 1;
-        let level = 1;
-        let balance = 0.004
 
-        let metadata = {
-            fields: [
-                { seed: true, seedType: "wheat", status: 3},
-                { seed: false, seedType: "", status: 0},
-                { seed: true, seedType: "wheat", status: 1}
-            ]
-        }
-        
-        await sync_blochchain(farmd_Id, level, balance, metadata);
 
 
         // response format will be same as withdraw functions
